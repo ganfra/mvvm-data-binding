@@ -18,30 +18,6 @@ public abstract class AdapterViewModel<T> extends RecyclerView.Adapter<HolderVie
     protected ObservableArrayList<T> mItems;
 
     public AdapterViewModel(final Context context, final ObservableArrayList<T> items) {
-
-        Observable.create(new Observable.OnSubscribe<Object>() {
-        })
-
-
-        Observable<List<T>> _items;
-        _items.subscribe(new Subscriber<List<T>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(List<T> ts) {
-
-            }
-        });
-
-
         mContext = context.getApplicationContext();
         mInflater = LayoutInflater.from(mContext);
         mItems = items;
