@@ -20,6 +20,9 @@ public abstract class ActivityViewModel<B extends ViewDataBinding, VM extends Vi
 
     protected abstract void attachViewModel(B binding, VM viewModel);
 
+    protected abstract void setupUI(B binding);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +38,6 @@ public abstract class ActivityViewModel<B extends ViewDataBinding, VM extends Vi
         mBinding = binding;
         attachViewModel(mBinding, mViewModel);
         setupUI(binding);
-    }
-
-    protected void setupUI(B binding) {
-        // OVERRIDE THIS
     }
 
     @Override

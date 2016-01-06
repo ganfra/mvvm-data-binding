@@ -1,8 +1,9 @@
 package fr.ganfra.mvvm.lib;
 
 import android.content.Context;
+import android.databinding.BaseObservable;
 
-public abstract class ViewModel {
+public abstract class ViewModel extends BaseObservable {
 
     private Context mAppContext;
 

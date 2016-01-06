@@ -23,6 +23,8 @@ public abstract class FragmentViewModel<B extends ViewDataBinding, VM extends Vi
 
     protected abstract void attachViewModel(B binding, VM viewModel);
 
+    protected abstract void setupUI(B binding);
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,10 +52,6 @@ public abstract class FragmentViewModel<B extends ViewDataBinding, VM extends Vi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUI(mBinding);
-    }
-
-    protected void setupUI(B binding) {
-        //override if needed
     }
 
     @Override
