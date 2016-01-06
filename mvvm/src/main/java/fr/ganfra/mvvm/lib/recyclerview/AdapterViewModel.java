@@ -5,11 +5,6 @@ import android.databinding.ObservableArrayList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
-import java.util.List;
-
-import rx.Observable;
-import rx.Subscriber;
-
 public abstract class AdapterViewModel<T> extends RecyclerView.Adapter<HolderViewModel> {
 
     protected Context mContext;
@@ -28,22 +23,5 @@ public abstract class AdapterViewModel<T> extends RecyclerView.Adapter<HolderVie
     public int getItemCount() {
         return mItems != null ? mItems.size() : 0;
     }
-
-
-    private class OnSubcribeToList implements Observable.OnSubscribe<List<Object>> {
-
-        List<Object> list;
-
-        
-
-
-
-
-        @Override
-        public void call(Subscriber<? super List<Object>> subscriber) {
-
-        }
-    }
-
 }
 
