@@ -21,9 +21,7 @@ public abstract class FragmentViewModel<B extends ViewDataBinding, VM extends Vi
     @LayoutRes
     protected abstract int getLayoutResId();
 
-    protected abstract void attachViewModel(B binding, VM viewModel);
-
-    protected abstract void setupUI(B binding);
+    protected abstract void setupUI();
 
 
     @Override
@@ -31,9 +29,9 @@ public abstract class FragmentViewModel<B extends ViewDataBinding, VM extends Vi
         super.onCreate(savedInstanceState);
         if (mViewModel == null) {
             mViewModel = createViewModel();
-            if (mViewModel instanceof SavedViewModel && savedInstanceState != null) {
-                final SavedViewModel savedViewModel = (SavedViewModel) mViewModel;
-                final Parcelable data = (Parcelable) savedInstanceState.get(SavedViewModel.EXTRA_VIEW_MODEL_DATA);
+            if (mViewModel instanceof ISavedViewModel && savedInstanceState != null) {
+                final ISavedViewModel savedViewModel = (ISavedViewModel) mViewModel;
+                final Parcelable data = (Parcelable) savedInstanceState.get(ISavedViewModel.EXTRA_VIEW_MODEL_DATA);
                 savedViewModel.restoreData(data);
             }
         }
@@ -44,23 +42,22 @@ public abstract class FragmentViewModel<B extends ViewDataBinding, VM extends Vi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final B binding = DataBindingUtil.inflate(inflater, getLayoutResId(), container, false);
         mBinding = binding;
-        attachViewModel(mBinding, mViewModel);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setupUI(mBinding);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setupUI();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mViewModel instanceof SavedViewModel) {
-            final SavedViewModel savedViewModel = (SavedViewModel) mViewModel;
+        if (mViewModel instanceof ISavedViewModel) {
+            final ISavedViewModel savedViewModel = (ISavedViewModel) mViewModel;
             final Parcelable data = savedViewModel.getDataToSave();
-            outState.putParcelable(SavedViewModel.EXTRA_VIEW_MODEL_DATA, data);
+            outState.putParcelable(ISavedViewModel.EXTRA_VIEW_MODEL_DATA, data);
         }
     }
 
